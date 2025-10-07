@@ -17,6 +17,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { useAuth } from './useAuth';
+import { parseFirebaseError, getUserErrorMessage, logError } from '../utils/errorHandler';
 
 interface UseFirestoreReturn<T> {
   data: T[];
@@ -81,22 +82,26 @@ export const useFirestore = <T extends DocumentData>(
           setError(null);
         },
         (err) => {
-          const errorMessage =
-            err instanceof Error ? err.message : 'Failed to fetch data';
+          const appError = parseFirebaseError(err);
+          const errorMessage = getUserErrorMessage(err);
           setError(errorMessage);
           setLoading(false);
-          console.error('Firestore listener error:', err);
+          logError(appError, 'Firestore listener error', {
+            collectionPath: userCollectionPath,
+          });
         }
       );
 
       // Cleanup listener on unmount or when dependencies change
       return () => unsubscribe();
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to set up listener';
+      const appError = parseFirebaseError(err);
+      const errorMessage = getUserErrorMessage(err);
       setError(errorMessage);
       setLoading(false);
-      console.error('Firestore setup error:', err);
+      logError(appError, 'Firestore setup error', {
+        collectionPath: userCollectionPath,
+      });
     }
   }, [user, collectionPath, queryConstraints]);
 
@@ -121,11 +126,11 @@ export const useFirestore = <T extends DocumentData>(
 
         return newDocRef.id;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to add document';
+        const appError = parseFirebaseError(err);
+        const errorMessage = getUserErrorMessage(err);
         setError(errorMessage);
-        console.error('Add document error:', err);
-        throw err;
+        logError(appError, 'Add document error', { collectionPath });
+        throw appError;
       }
     },
     [user]
@@ -150,11 +155,11 @@ export const useFirestore = <T extends DocumentData>(
 
         await updateDoc(docRef, data);
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to update document';
+        const appError = parseFirebaseError(err);
+        const errorMessage = getUserErrorMessage(err);
         setError(errorMessage);
-        console.error('Update document error:', err);
-        throw err;
+        logError(appError, 'Update document error', { collectionPath, docId });
+        throw appError;
       }
     },
     [user]
@@ -175,11 +180,11 @@ export const useFirestore = <T extends DocumentData>(
 
         await deleteDoc(docRef);
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to delete document';
+        const appError = parseFirebaseError(err);
+        const errorMessage = getUserErrorMessage(err);
         setError(errorMessage);
-        console.error('Delete document error:', err);
-        throw err;
+        logError(appError, 'Delete document error', { collectionPath, docId });
+        throw appError;
       }
     },
     [user]
@@ -208,11 +213,11 @@ export const useFirestore = <T extends DocumentData>(
 
         return null;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to get document';
+        const appError = parseFirebaseError(err);
+        const errorMessage = getUserErrorMessage(err);
         setError(errorMessage);
-        console.error('Get document error:', err);
-        throw err;
+        logError(appError, 'Get document error', { collectionPath, docId });
+        throw appError;
       }
     },
     [user]

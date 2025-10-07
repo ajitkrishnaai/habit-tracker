@@ -22,9 +22,16 @@ Based on PRD: `0001-prd-habit-tracker.md`
 - `src/hooks/useAuth.test.ts` - Unit tests for authentication hook
 - `src/hooks/useHabits.ts` - Custom hook for habit-specific CRUD operations
 - `src/hooks/useDailyEntries.ts` - Custom hook for daily entry CRUD operations
+- `src/hooks/useNetworkStatus.ts` - Custom hook for monitoring network and sync status
+- `src/hooks/useErrorHandler.ts` - Custom hook for error handling in React components
 - `src/services/habitService.ts` - Business logic layer for habit data operations
 - `src/services/dailyEntryService.ts` - Business logic layer for daily entry operations
-- `src/config/firebase.ts` - Firebase configuration and initialization
+- `src/components/NetworkStatusIndicator.tsx` - Component for displaying network status
+- `src/components/ErrorBoundary.tsx` - Error boundary component for catching React errors
+- `src/components/ErrorDisplay.tsx` - Component for displaying user-friendly error messages
+- `src/config/firebase.ts` - Firebase configuration and initialization with offline persistence
+- `src/utils/cacheManager.ts` - Utility functions for cache management and data sync
+- `src/utils/errorHandler.ts` - Centralized error handling utilities for Firebase and network errors
 - `src/utils/habitCalculations.ts` - Utility functions for streak and percentage calculations
 - `src/utils/habitCalculations.test.ts` - Unit tests for habit calculation utilities
 - `src/utils/dateHelpers.ts` - Utility functions for date formatting and manipulation
@@ -65,8 +72,8 @@ Based on PRD: `0001-prd-habit-tracker.md`
   - [x] 2.3 Create useFirestore custom hook for Firestore data operations
   - [x] 2.4 Implement habit data storage functions (save, load, update, delete habits in Firestore)
   - [x] 2.5 Implement daily entry storage functions (save, load daily completions and reflections)
-  - [ ] 2.6 Set up Firestore offline persistence and data caching
-  - [ ] 2.7 Create error handling for Firebase operations and network issues
+  - [x] 2.6 Set up Firestore offline persistence and data caching
+  - [x] 2.7 Create error handling for Firebase operations and network issues
   - [ ] 2.8 Build utility functions for date formatting and Firestore timestamp handling
   - [ ] 2.9 Implement data export functionality (JSON format from Firestore)
   - [ ] 2.10 Write comprehensive unit tests for all Firebase data layer functions
