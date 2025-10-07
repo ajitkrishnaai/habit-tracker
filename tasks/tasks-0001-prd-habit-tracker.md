@@ -20,6 +20,10 @@ Based on PRD: `0001-prd-habit-tracker.md`
 - `src/hooks/useFirestore.test.ts` - Unit tests for Firestore hook
 - `src/hooks/useAuth.ts` - Custom hook for Firebase Anonymous Authentication
 - `src/hooks/useAuth.test.ts` - Unit tests for authentication hook
+- `src/hooks/useHabits.ts` - Custom hook for habit-specific CRUD operations
+- `src/hooks/useDailyEntries.ts` - Custom hook for daily entry CRUD operations
+- `src/services/habitService.ts` - Business logic layer for habit data operations
+- `src/services/dailyEntryService.ts` - Business logic layer for daily entry operations
 - `src/config/firebase.ts` - Firebase configuration and initialization
 - `src/utils/habitCalculations.ts` - Utility functions for streak and percentage calculations
 - `src/utils/habitCalculations.test.ts` - Unit tests for habit calculation utilities
@@ -56,11 +60,11 @@ Based on PRD: `0001-prd-habit-tracker.md`
   - [x] 1.11 Run initial test suite to verify project and Firebase setup is working correctly
 
 - [ ] 2.0 Core Data Layer and Firebase Implementation
-  - [ ] 2.1 Define TypeScript interfaces for Habit and DailyEntry data models with Firestore structure
-  - [ ] 2.2 Set up Firebase Anonymous Authentication with useAuth hook
-  - [ ] 2.3 Create useFirestore custom hook for Firestore data operations
-  - [ ] 2.4 Implement habit data storage functions (save, load, update, delete habits in Firestore)
-  - [ ] 2.5 Implement daily entry storage functions (save, load daily completions and reflections)
+  - [x] 2.1 Define TypeScript interfaces for Habit and DailyEntry data models with Firestore structure
+  - [x] 2.2 Set up Firebase Anonymous Authentication with useAuth hook
+  - [x] 2.3 Create useFirestore custom hook for Firestore data operations
+  - [x] 2.4 Implement habit data storage functions (save, load, update, delete habits in Firestore)
+  - [x] 2.5 Implement daily entry storage functions (save, load daily completions and reflections)
   - [ ] 2.6 Set up Firestore offline persistence and data caching
   - [ ] 2.7 Create error handling for Firebase operations and network issues
   - [ ] 2.8 Build utility functions for date formatting and Firestore timestamp handling

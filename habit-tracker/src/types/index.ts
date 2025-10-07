@@ -1,6 +1,28 @@
 // Core data types for the habit tracker app
 
+import { Timestamp } from 'firebase/firestore';
+
+// Habit document structure in Firestore: users/{userId}/habits/{habitId}
 export interface Habit {
+  id: string;
+  name: string;
+  createdDate: Timestamp;
+  isActive: boolean;
+  order: number;
+}
+
+// DailyEntry document structure in Firestore: users/{userId}/entries/{entryId}
+export interface DailyEntry {
+  id: string;
+  date: string; // YYYY-MM-DD format
+  habitId: string;
+  completed: boolean;
+  reflection: string;
+  timestamp: Timestamp;
+}
+
+// Client-side versions with Date objects (converted from Firestore Timestamps)
+export interface HabitData {
   id: string;
   name: string;
   createdDate: Date;
@@ -8,7 +30,7 @@ export interface Habit {
   order: number;
 }
 
-export interface DailyEntry {
+export interface DailyEntryData {
   id: string;
   date: string; // YYYY-MM-DD format
   habitId: string;
@@ -57,16 +79,16 @@ export interface ReflectionFormData {
 
 // View/Component prop types
 export interface HabitCardProps {
-  habit: Habit;
-  dailyEntry?: DailyEntry;
+  habit: HabitData;
+  dailyEntry?: DailyEntryData;
   stats: HabitStats;
   onToggleComplete: (_habitId: string, _completed: boolean) => void;
   onEditReflection: (_habitId: string, _reflection: string) => void;
 }
 
 export interface ProgressChartProps {
-  habits: Habit[];
-  entries: DailyEntry[];
+  habits: HabitData[];
+  entries: DailyEntryData[];
   dateRange: {
     start: string;
     end: string;
