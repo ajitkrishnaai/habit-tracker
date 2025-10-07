@@ -42,7 +42,7 @@ Based on PRD: `0001-prd-habit-tracker.md`
 
 ## Tasks
 
-- [ ] 1.0 Project Setup and Configuration
+- [x] 1.0 Project Setup and Configuration
   - [x] 1.1 Initialize new React project with Vite and TypeScript
   - [x] 1.2 Install and configure essential dependencies (React, TypeScript, Jest, Testing Library)
   - [x] 1.3 Install Firebase SDK and configure Firebase project
